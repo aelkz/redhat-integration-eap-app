@@ -40,7 +40,6 @@
     </licenses>
 
     <dependencies>
-
         <!-- Depend on the ejb module and war so that we can package them -->
         <dependency>
             <groupId>br.com.redhat</groupId>
