@@ -39,9 +39,9 @@
             <h:inputText id="sku" value="#{newProduct.sku}"/>
             <h:message for="sku" errorClass="invalid"/>
 
-            <h:outputLabel for="coast" value="Coast:"/>
-            <h:inputText id="coast" value="#{newProduct.coast}"/>
-            <h:message for="coast" errorClass="invalid"/>
+            <h:outputLabel for="cost" value="Cost:"/>
+            <h:inputText id="cost" value="#{newProduct.cost}"/>
+            <h:message for="cost" errorClass="invalid"/>
          </h:panelGrid>
 
          <p>
@@ -73,8 +73,8 @@
                 #{_product.sku}
             </h:column>
          <h:column>
-            <f:facet name="header">Coast</f:facet>
-                #{_product.coast}
+            <f:facet name="header">Cost</f:facet>
+                #{_product.cost}
             </h:column>
          <h:column>
             <f:facet name="header">REST URL</f:facet>

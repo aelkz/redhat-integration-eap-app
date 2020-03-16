@@ -37,7 +37,7 @@ public class Product extends DateCommon {
 
 	@NotNull
 	@Column
-	private BigDecimal coast;
+	private BigDecimal cost;
 
 	public Long getId() {
 		return id;
@@ -63,12 +63,12 @@ public class Product extends DateCommon {
 		this.sku = sku;
 	}
 
-	public BigDecimal getCoast() {
-		return coast;
+	public BigDecimal getCost() {
+		return cost;
 	}
 
-	public void setCoast(BigDecimal coast) {
-		this.coast = coast;
+	public void setCost(BigDecimal cost) {
+		this.cost = cost;
 	}
 
 }

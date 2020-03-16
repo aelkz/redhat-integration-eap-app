@@ -58,7 +58,7 @@ public class OrderMessageBean implements MessageListener {
 	@Override
 	public void onMessage(Message message) {
 		try {
-			log.log(Level.INFO, "Order MDB Called :: ".concat(message.getJMSMessageID()));
+			log.log(Level.INFO, "Order MDB Called :: ");
 
 			final BytesMessage byteMessage = ((BytesMessage) message);
 			
@@ -67,7 +67,7 @@ public class OrderMessageBean implements MessageListener {
 			
 		    final String body = new String(data);
 
-			if (body != null && !body.equals("")) {
+			if (!"".equals(body.trim())) {
 				log.log(Level.INFO, "Data Consumed :: ".concat(body));
 
 				OrderDTO orderDTO = unmarshall(body.toString());
@@ -110,7 +110,10 @@ public class OrderMessageBean implements MessageListener {
 				}
 			}
 		} catch (Exception ex) {
-			log.log(Level.WARNING, "MDB Error :: ".concat(ex.getMessage()));
+			log.log(Level.WARNING, "MDB Error");
+			if (ex != null && ex.getMessage() != null) {
+				log.log(Level.WARNING, "MDB Error :: "+ex.getMessage());
+			}
 			mdctx.setRollbackOnly();
 		}
 	}
