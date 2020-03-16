@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import javax.annotation.Resource;
 import javax.ejb.ActivationConfigProperty;
 import javax.ejb.EJB;
@@ -15,11 +14,8 @@ import javax.inject.Inject;
 import javax.jms.BytesMessage;
 import javax.jms.Message;
 import javax.jms.MessageListener;
-
 import org.jboss.ejb3.annotation.ResourceAdapter;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import br.com.redhat.data.CustomerRepository;
 import br.com.redhat.data.ProductRepository;
 import br.com.redhat.dto.OrderDTO;
@@ -31,9 +27,6 @@ import br.com.redhat.model.Order;
 import br.com.redhat.model.Product;
 import br.com.redhat.model.ProducutOrder;
 
-
-
- 
 @MessageDriven(activationConfig = { 
 		@ActivationConfigProperty(propertyName = "clientID", propertyValue = "jboss-queue-order"),
 		@ActivationConfigProperty(propertyName = "destination", propertyValue = "order"),
