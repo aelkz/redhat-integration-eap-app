@@ -58,7 +58,8 @@ public class OrderMessageBean implements MessageListener {
 	@Override
 	public void onMessage(Message message) {
 		try {
-			
+			log.log(Level.INFO, "Order MDB Called :: ".concat(message.getJMSMessageID()));
+
 			final BytesMessage byteMessage = ((BytesMessage) message);
 			
 			byte[] data = new byte[(int) byteMessage.getBodyLength()];
@@ -75,7 +76,7 @@ public class OrderMessageBean implements MessageListener {
 						orderDTO.getCustomer().getDocument());
 
 				if (customer == null) {
-					throw new RuntimeException("Customer does not existis in the system");
+					throw new RuntimeException("Customer does not exists");
 				}
 
 				Map<Integer, Product> mapProduct = new HashMap<>();
@@ -85,7 +86,7 @@ public class OrderMessageBean implements MessageListener {
 					product = productRepository.findProductBySKU(pDTO.getSku());
 
 					if (product == null) {
-						throw new RuntimeException("Product does not existis in the system");
+						throw new RuntimeException("Product does not exists");
 					}
 					
 					mapProduct.put(pDTO.getQuantity(), product);
@@ -109,6 +110,7 @@ public class OrderMessageBean implements MessageListener {
 				}
 			}
 		} catch (Exception ex) {
+			log.log(Level.WARNING, "MDB Error :: ".concat(ex.getMessage()));
 			mdctx.setRollbackOnly();
 		}
 	}
