@@ -5,9 +5,6 @@ import java.util.List;
 
 public class OrderDTO implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 5995499112268662573L;
 
 	private CustomerDTO customer;

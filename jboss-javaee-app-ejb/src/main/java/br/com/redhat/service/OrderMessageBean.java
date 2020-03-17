@@ -61,7 +61,6 @@ public class OrderMessageBean implements MessageListener {
 	public void onMessage(Message message) {
 		try {
 			log.log(Level.INFO, "Order MDB Called :: ");
-
 			String body = null;
 
 			try {
@@ -71,7 +70,7 @@ public class OrderMessageBean implements MessageListener {
 				byte[] data = new byte[(int) byteMessage.getBodyLength()];
 				byteMessage.readBytes(data);
 				body = new String(data);
-			}catch (RuntimeException ex) {
+			}catch (ClassCastException ex) {
 				log.log(Level.INFO, "Order MDB :: Check if received message is TextMessage");
 
 				log.log(Level.INFO, ex.getMessage());

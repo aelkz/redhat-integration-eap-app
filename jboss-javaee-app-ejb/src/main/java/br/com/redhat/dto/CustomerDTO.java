@@ -4,9 +4,6 @@ import java.io.Serializable;
 
 public class CustomerDTO implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -2199082307282900286L;
 
 	private String name;
