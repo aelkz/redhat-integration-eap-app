@@ -14,6 +14,8 @@ import javax.inject.Inject;
 import javax.jms.BytesMessage;
 import javax.jms.Message;
 import javax.jms.MessageListener;
+import javax.jms.TextMessage;
+
 import org.jboss.ejb3.annotation.ResourceAdapter;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import br.com.redhat.data.CustomerRepository;
@@ -60,12 +62,25 @@ public class OrderMessageBean implements MessageListener {
 		try {
 			log.log(Level.INFO, "Order MDB Called :: ");
 
-			final BytesMessage byteMessage = ((BytesMessage) message);
-			
-			byte[] data = new byte[(int) byteMessage.getBodyLength()];
-			byteMessage.readBytes(data);
-			
-		    final String body = new String(data);
+			String body = null;
+
+			try {
+				log.log(Level.INFO, "Order MDB :: Check if received message is ByteMessage");
+
+				final BytesMessage byteMessage = ((BytesMessage) message);
+				byte[] data = new byte[(int) byteMessage.getBodyLength()];
+				byteMessage.readBytes(data);
+				body = new String(data);
+			}catch (RuntimeException ex) {
+				log.log(Level.INFO, "Order MDB :: Check if received message is TextMessage");
+
+				log.log(Level.INFO, ex.getMessage());
+				log.log(Level.INFO, ex.getLocalizedMessage());
+				ex.printStackTrace();
+
+				TextMessage textMessage = ((TextMessage) message);
+				body = new String(textMessage.getText());
+			}
 
 			if (!"".equals(body.trim())) {
 				log.log(Level.INFO, "Data Consumed :: ".concat(body));
